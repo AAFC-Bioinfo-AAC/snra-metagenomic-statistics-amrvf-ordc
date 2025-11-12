@@ -1,0 +1,21 @@
+# .gitignore
+# This file tells Git which files and directories to ignore when tracking changes in this repository.
+# Ignored files will not be included in commits or pushed to the remote repository.
+
+# Basic Rules:
+# - Lines starting with "#" are comments and ignored by Git.
+# - To ignore a file, write its name (e.g., "example.txt").
+# - To ignore all files in a directory, use a trailing slash (e.g., "logs/").
+# - Use "*" as a wildcard to match multiple files (e.g., "*.log" ignores all .log files).
+# - To un-ignore a specific file in an ignored directory, use "!" (e.g., "!important.txt").
+
+# Common Examples:
+# Ignore all log files
+# *.log
+# Ignore environment files (often used for secrets or configurations)
+# .env
+# Ignore compiled files (e.g., Python bytecode)
+# *.pyc
+# __pycache__/
+# Ignore dependency directories
+# venv/
