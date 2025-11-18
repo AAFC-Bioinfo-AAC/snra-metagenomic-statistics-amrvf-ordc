@@ -8,7 +8,7 @@ This project exists thanks to the work of many people. We gratefully acknowledge
 ## Authors
 ### Lead Author
 Dr. Haley Sanderson  
-Bioinformatics Programmer  
+Bioinformatics Programmer 
 Agriculture & Agri-Food Canada  
 Haley.Sanderson@agr.gc.ca
 
