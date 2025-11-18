@@ -1,0 +1,135 @@
+# SCripts required for the processing of the MAGs
+# Author: Dr. Haley Sanderson haley.sanderson@agr.gc.ca
+# Copyright: Government of Canada
+# License: MIT
+# Version 0.1
+
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=checkm2
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=120000M
+#SBATCH --time=24:00:00
+#SBATCH --comment="image=registry.maze.science.gc.ca/ssc-hpcs/generic-job:ubuntu22.04,tmpfs_size=100G"
+
+
+#get completeness and contamination for MAGs from checkm2
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/checkm2
+checkm2 predict --threads 30 --input mags-fasta --output-directory checkm2_results -x .fa --force
+
+
+#taxonomic Classification of quality MAGs with GTDB-tk
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=checkm2
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=120000M
+#SBATCH --time=24:00:00
+#SBATCH --comment="image=registry.maze.science.gc.ca/ssc-hpcs/generic-job:ubuntu22.04,tmpfs_size=50G"
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/GTDB-tk
+line=$1
+
+gtdbtk classify_wf --genome_dir mags-fasta --out_dir GTDB_class_output --skip ani_screen
+
+#making folder with just good bins
+
+#!/bin/bash -l
+
+cat "qualitybins.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    cp mags-fasta/"$line".fa quality-mags
+done
+
+#making folder with just bacterial bins
+
+#!/bin/bash -l
+
+cat "bacterialbins.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    cp mags-fasta/"$line".fa bacterial_mags
+done
+
+#blast for MEGARES and VFDB
+
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=blast_megares
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=60000M
+#SBATCH --time=24:00:00
+#SBATCH --comment="image=registry.maze.science.gc.ca/ssc-hpcs/generic-job:ubuntu22.04,tmpfs_size=100G"
+
+line=$1
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/BLAST
+makeblastdb -in megares_database_v3.00.fasta -dbtype nucl -out megares
+
+blastn -query "$line".fa -db megares -out "$line"_megares_output -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qseq sseq"
+
+#!/bin/bash -l
+cat "bacterialbins.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch blast_megares.sh "$line"
+done
+
+
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=blast_vfdb
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=60000M
+#SBATCH --time=24:00:00
+#SBATCH --comment="image=registry.maze.science.gc.ca/ssc-hpcs/generic-job:ubuntu22.04,tmpfs_size=100G"
+
+line=$1
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/BLAST
+#makeblastdb -in VFDB_setB_nt.fas.gz -dbtype nucl -out vfdb_full
+
+blastn -query "$line".fa -db vfdb_full -out "$line"_vfdb_output -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qseq sseq"
+
+#!/bin/bash -l
+cat "bacterialbins.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch blast_vfdb.sh "$line"
+done
+
+
+#nt_db database search
+
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=blast_nt_db
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=60000M
+#SBATCH --time=24:00:00
+#SBATCH --comment="image=registry.maze.science.gc.ca/ssc-hpcs/generic-job:ubuntu22.04,tmpfs_size=100G"
+
+line=$1
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/BLAST
+#makeblastdb -in VFDB_setB_nt.fas.gz -dbtype nucl -out vfdb_full
+
+blastn -query "$line".fa -db nt_db -out "$line"_nt_db_output -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qseq sseq"
+
+#!/bin/bash -l
+cat "qualitybins_noid.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch blast_nt_db.sh "$line"
+done
