@@ -1,0 +1,44 @@
+# Scripts required for read mapping all the MAGS to get relative abundances
+# Author: Dr. Haley Sanderson haley.sanderson@agr.gc.ca
+# Copyright: Government of Canada
+# License: MIT
+# Version 0.1
+
+#aligning reads to MAGs
+
+#MAG_read_mapping.sh
+
+#!/bin/bash -l
+#SBATCH --export=USER,LOGNAME,HOME,MAIL,PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#SBATCH --job-name=mapping_reads_MAGs
+#SBATCH --account=grdi_genarcc
+#SBATCH --partition=standard
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=40000M
+#SBATCH --time=24:00:00
+
+mag=$1
+sample=$2
+export TMPDIR=/gpfs/fs7/grdi/genarcc/grdi_eco/groups/chenw/GRDI_Ecobiomics_AMR.VF/2.trimmed_fastq/tmp
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate /gpfs/fs7/grdi/genarcc/wp3/common/conda/envs/mapping_reads
+
+#changed from bowtie2 to bwa
+
+#bowtie2-build bacterial_mags/"$mag".fa "$mag"_index
+#bowtie2 -x "$mag"_index -1 "$sample"_R1.atria.fq.gz -2 "$sample"_R2.atria.fq.gz -S "$mag"_"$sample".sam>
+bwa index bacterial_mags/"$mag".fa
+bwa mem bacterial_mags/"$mag".fa "$sample"_R1.atria.fq.gz "$sample"_R2.atria.fq.gz > "$mag"_"$sample".sam
+samtools view -b -o "$mag"_"$sample".bam "$mag"_"$sample".sam
+samtools sort -o sorted_"$mag"_"$sample".bam "$mag"_"$sample".bam
+samtools index sorted_"$mag"_"$sample".bam
+samtools flagstat sorted_"$mag"_"$sample".bam > Read_mapping_counts_"$mag"_"$sample".txt
+
+
+#setup MAG Read Counting
+
+#!/bin/bash -l
+cat "list_MG_samples.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch MAG_read_mapping.sh  <MAG> "$line"
+done
