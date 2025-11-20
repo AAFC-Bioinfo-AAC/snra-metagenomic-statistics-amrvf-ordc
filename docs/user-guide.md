@@ -76,7 +76,8 @@ cd SNRA-Metagenomic-Statistics-AMRVF-ORDC
 - Create the Conda environment
 
 ```bash
-conda env create -f your-repo/config/environment.yml
+conda env create -f qiime2-amplicon-ubuntu-latest-conda.yml
+
 conda activate qiime2-2023.7
 ```
 Ensure Atria and Cutadapt are installed and available in your PATH.
