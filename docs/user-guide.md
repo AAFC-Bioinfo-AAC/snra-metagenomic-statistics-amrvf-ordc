@@ -74,8 +74,6 @@ To download the reference data, run: wget https://ftp.microbio.me/greengenes_rel
 
 ### Installation
 
-> 👉 *Provide pre-requisites and setup instructions.*
-
 #### Pre-requisites
 
 - Conda
@@ -274,3 +272,185 @@ Output files include:
 | logs/	| Log files for all steps |
 
 ---
+## Metagenomic Read-Based Detection of Antimicrobial Resistance and Virulence Genes
+
+### Summary
+### Data
+Trimmed (using Trimmomatic) metagenomic reads for each of the samples in compressed fastq format.
+
+### Installation
+
+#### Pre-requisites
+
+- Conda
+- fastqc
+- multiqc
+- bowtie2
+- samtools
+- bedtools
+- kma
+- Python 3.9+
+- Recommended OS: Linux
+
+#### Setup Instructions
+
+- Clone the repository:
+
+```bash
+git clone https://github.com/AAFC-BICoE/SNRA-Metagenomic-Statistics-AMRVF-ORDC/
+cd SNRA-Metagenomic-Statistics-AMRVF-ORDC
+```
+
+- Create the Conda environment
+
+```bash
+conda env create -f conda_env/multifastqc.yaml
+conda env create -f conda_env/metareadcounts.yaml
+```
+Download VFDB (http://www.mgc.ac.cn/VFs/download.htm; lastupdate: Fri Dec 1 19:30:02 2023)
+ and MegaRESv3 (https://www.meglab.org/megares/download/) and put them in your PATH
+
+### Parameters
+The bash scripts have three components:
+1. The main script: This has the actual command for software that I want to run on the samples.
+
+```
+#!/bin/bash -l
+#starts calling bash with the HPC specific details
+
+#initating conda 
+source ~/miniconda3/etc/profile.d/conda.sh
+#activating conda environment with fastqc (or other software you are using) installed
+conda activate multifastqc
+
+#calling the variable from the assisting script to bring sample information into script
+line=$1
+
+#the actual code/software I want to execute on the sample
+fastqc "$line"_R1.atria.fq.gz
+fastqc "$line"_R2.atria.fq.gz
+```
+2. The assisting script: This ensures that all the samples run in a separate job and using the main script.
+```
+#calling bash
+#!/bin/bash -l
+#loop the command to run the main script through a list of samples
+cat "list_MG_samples.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch fastqc.sh "$line"
+done
+```
+3. The list of samples I want to run
+```
+SN005-20160524
+SN005-20160606
+SN005-20160704
+ ```
+
+---
+
+### Step-by-step Usage
+### Read_Quality_Control
+1. Run fastqc on all the metagenomic reads (in compressed fastq format) (*fastqc.sh* and *assisting_fastqc.sh*).
+2. Use MultiQC to get the results from fastqc in one report (*multiqc.sh*).
+
+### Read-based_AMR_VF_Detection
+1. Use Bowtie2 and SAMtools to map metagenomic reads to the MEGARes database (*mappingread.sh*).
+2. Assisting script for 1 to read map for every sample listed in the accompanying txt file (one sample per line) (*assisting_mappingread.sh*).
+3. Use Bowtie2 and SAMtools to map metagenomic reads to the VFDB database (*VFDB_mappingread.sh*).
+4. Assisting script for 3 to read map for every sample listed in the accompanying txt file (*assisting_VFDB_mappingread.sh*).
+5. Use the experimentally proven VFDB database with read mapping with Bowtie2 and SAMtools (*VFDB_exp_mappingreads.sh*).
+6. Assisting script for 5 to read map for every sample listed in the accompanying txt file (*assisting_VFDB_exp_mappingreads.sh*).
+7. Map reads for MEGARes using KMA (*mapping_AMR_KMA.sh*).
+8. Assisting script for 7 to read map for every sample listed in the accompanying txt file (*assisting_mapping_AMR_KMA.sh*).
+9. Map reads for VFDB using KMA (*mapping_VFDB_KMA.sh*).
+10. Assisting script for 9 to read map for every sample listed in the accompanying txt file (*assisting_mapping_VFDB_KMA.sh*).
+
+### Output
+A list of the AMR genes and VFs present in each metagenomic sample.
+| File/Folder	| Description |
+|------------|--------------|
+| output/"$line" | TXT file with the table of AMR genes from MegaRES mapped to a particular set of reads (specified in the variable $line in the bash scripts) |
+| KMA_output/"$line"_VFDB |	TXT File with the table of virulence genes from VFDB mapped to a particular set of reads ( specified in the variable $line in the bash scripts) |
+---
+
+## Metagenomic Read-Based Detection of Antimicrobial Resistance and Virulence Genes
+
+### Summary
+### Data
+Trimmed (using Trimmomatic) metagenomic reads for each of the samples in compressed fastq format.
+
+### Installation
+
+#### Pre-requisites
+
+Reads are first taxonomically characterised using the custom Snakemake pipeline found here: [snra-metagenomic-statistics-amrvf-ordc-report](https://github.com/AAFC-Bioinfo-AAC/snra-metagenomic-statistics-amrvf-ordc-report)
+
+- Conda
+
+- Python 3.9+
+- Recommended OS: Linux
+
+#### Setup Instructions
+
+- Clone the repository:
+
+```bash
+git clone https://github.com/AAFC-BICoE/SNRA-Metagenomic-Statistics-AMRVF-ORDC/
+cd SNRA-Metagenomic-Statistics-AMRVF-ORDC
+```
+
+- Create the Conda environment
+
+```bash
+conda env create -f conda_env/multifastqc.yaml
+conda env create -f conda_env/metareadcounts.yaml
+```
+
+
+### Parameters
+The bash scripts have three components:
+1. The main script: This has the actual command for software that I want to run on the samples.
+
+```
+#!/bin/bash -l
+#starts calling bash with the HPC specific details
+
+#initating conda 
+source ~/miniconda3/etc/profile.d/conda.sh
+#activating conda environment with fastqc (or other software you are using) installed
+conda activate multifastqc
+
+#calling the variable from the assisting script to bring sample information into script
+line=$1
+
+#the actual code/software I want to execute on the sample
+fastqc "$line"_R1.atria.fq.gz
+fastqc "$line"_R2.atria.fq.gz
+```
+2. The assisting script: This ensures that all the samples run in a separate job and using the main script.
+```
+#calling bash
+#!/bin/bash -l
+#loop the command to run the main script through a list of samples
+cat "list_MG_samples.txt" | while IFS= read -r line; do
+    echo "Processing line: $line"
+    sbatch fastqc.sh "$line"
+done
+```
+3. The list of samples I want to run
+```
+SN005-20160524
+SN005-20160606
+SN005-20160704
+ ```
+
+---
+
+### Step-by-step Usage
+
+### Output
+A list of the AMR genes and VFs present in each metagenomic sample.
+| File/Folder	| Description |
+|------------|--------------|
+| output/"$line" | TXT file with the table of AMR genes from MegaRES mapped to a particular set of reads (specified in the variable $line in the bash scripts) |
