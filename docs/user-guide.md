@@ -5,8 +5,6 @@
 
 ## Overview
 
-> 👉 *Provide a high-level process summary with an optional workflow diagram, created using [Mermaid Diagramming and charting tool](https://mermaid.js.org/) and its [test playground](https://www.mermaidchart.com/play).*
-
 These scripts provide the inforamtion to process and analysis 16S sequencing and metagenomic sequencing reads originating for watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data).
 
 ## Workflow diagrams
@@ -20,8 +18,6 @@ These scripts provide the inforamtion to process and analysis 16S sequencing and
 ---
 
 ## Overall Data
-
-> 👉 *Provide information on input data formats, structure, and sources.*
 
 - **16S Sequencing Data**: 16S Sequencing read are available here: 
 - **Metagenomic Sequencing Data**: Metagenomic Sequencing read are available here:
@@ -83,8 +79,6 @@ conda activate qiime2-2023.7
 Ensure Atria and Cutadapt are installed and available in your PATH.
 
 ### Parameters
-
-> 👉 *List all configuration options in a clear and consistent format. Include descriptions, expected values, and defaults if applicable.*  
 
 | Parameter          | Description                                         | Type    | Default    | Example                 |
 |--------------------|-----------------------------------------------------|---------|------------|-------------------------|
@@ -239,7 +233,6 @@ qiime feature-classifier classify-sklearn \
 ```
 ### Output
 
-> 👉 *Describe output format, location, naming convention, and purpose.*
 
 Output files include:
 
@@ -258,7 +251,7 @@ Output files include:
 
 ### Summary
 
-Metagenomic trimmed reads are mapped to an antomicrobial resistance gene and a virulence gene database to determine is these types of genes are present in the samples.
+Metagenomic trimmed reads are mapped to an antimicrobial resistance gene and a virulence gene database to determine is these types of genes are present in the samples.
 
 ### Data
 Trimmed (using Trimmomatic) metagenomic reads for each of the samples in compressed fastq format.
