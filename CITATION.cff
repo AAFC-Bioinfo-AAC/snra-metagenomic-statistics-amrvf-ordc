@@ -30,8 +30,7 @@ message: >-
 # TITLE (required)
 # The formal name of your software or dataset.
 # ---------------------------------------------------------------------------
-title: >-
-  snra-metagenomic-statistics-amrvf-ordc
+title: "snra-metagenomic-statistics-amrvf-ordc"
 
 # ---------------------------------------------------------------------------
 # TYPE (optional but highly recommended)
@@ -140,6 +139,7 @@ authors:
 # =============================================================================
 # END OF TEMPLATE
 # =============================================================================
+
 
 
 
