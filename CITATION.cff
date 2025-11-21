@@ -31,7 +31,7 @@ message: >-
 # The formal name of your software or dataset.
 # ---------------------------------------------------------------------------
 title: >-
-  ABCC Template Repository: A Reproducible Data Processing Pipeline Template
+  snra-metagenomic-statistics-amrvf-ordc
 
 # ---------------------------------------------------------------------------
 # TYPE (optional but highly recommended)
@@ -52,7 +52,7 @@ version: "1.0.0"
 # DATE RELEASED (optional but recommended)
 # Use ISO 8601 format: YYYY-MM-DD
 # ---------------------------------------------------------------------------
-date-released: "2025-09-11"
+date-released: "2025-11-21"
 
 # ---------------------------------------------------------------------------
 # LICENSE (optional but strongly recommended)
@@ -65,7 +65,7 @@ license: MIT
 # URL pointing to your code repository.
 # For non-code resources, use 'repository-artifact:' or 'url:' instead.
 # ---------------------------------------------------------------------------
-repository-code: "https://github.com/AAFC-Bioinfo-AAC/template-repository"
+repository-code: "https://github.com/AAFC-Bioinfo-AAC/snra-metagenomic-statistics-amrvf-ordc"
 
 # ---------------------------------------------------------------------------
 # ABSTRACT (optional but recommended)
@@ -73,11 +73,7 @@ repository-code: "https://github.com/AAFC-Bioinfo-AAC/template-repository"
 # Newlines are converted to spaces, forming a flowing paragraph.
 # ---------------------------------------------------------------------------
 abstract: >-
-  The AAFC Bioinformatics Code Catalogue (ABCC) template repository provides a
-  modular and extensible framework for developing reproducible data analysis
-  pipelines within the AAFC-Bioinfo-AAC GitHub organization. It enables
-  researchers and developers to quickly initialize new projects using
-  parameterized, reusable components adaptable to diverse analytical workflows.
+This repository contains the scripts for the processing and analysis of 16S and metagenomic data from the water basin including taxonomic classification of the samples and detection of antimicrobial resistance and virulence genes.
 
 # ---------------------------------------------------------------------------
 # KEYWORDS (optional)
@@ -86,9 +82,9 @@ abstract: >-
 keywords:
   - reproducibility
   - bioinformatics
-  - template
-  - pipeline
-  - Snakemake
+  - metagenomics
+  - 16S sequencing
+  - One Health
   - AAFC
 
 # ---------------------------------------------------------------------------
@@ -108,23 +104,22 @@ keywords:
 #   (2) name                        (for teams or organizations)
 # ---------------------------------------------------------------------------
 authors:
-  # Example 1: Team author (for collaborative repos)
-  - name: "AAFC Bioinformatics Code Catalogue (ABCC) project team"
+  Haley Sanderson 
+  - name: "Biological Informatics Center of Excellence"
     affiliation: "Agriculture and Agri-Food Canada (AAFC)"
+    ORCID: "https://orcid.org/0009-0006-4812-1647"
 
-  # Example 2: Individual authors (optional if team is listed)
-  # - given-names: "First name"
-  #   family-names: "Last name"
-  #   affiliation: "Agriculture and Agri-Food Canada (AAFC)"
-  #   orcid: "https://orcid.org/0000-0000-0000-0000"
+  Yichao Shi
+  - affiliation: "Agriculture and Agri-Food Canada"
+    ORCID: "https://orcid.org/0009-0009-4531-4111"
 
 # ---------------------------------------------------------------------------
 # CONTACT (optional)
 # The main contact person for the repository (often the maintainer).
 # ---------------------------------------------------------------------------
 # contact:
-#  - name: "First Last"
-#    email: "first.last@agr.gc.ca"
+#  - name: "Haley Sanderson"
+#    email: "haley.sanderson@agr.gc.ca"
 
 # ---------------------------------------------------------------------------
 # PREFERRED CITATION (optional but recommended)
@@ -133,7 +128,7 @@ authors:
 # ---------------------------------------------------------------------------
 # preferred-citation:
 #   type: article
-#   title: "ABCC Template Repository: A reproducible pipeline framework for AAFC bioinformatics"
+#   title: "snra-metagenomic-statistics-amrvf-ordc"
 #   authors:
 #     - given-names: "First"
 #       family-names: "Last"
@@ -144,5 +139,6 @@ authors:
 # =============================================================================
 # END OF TEMPLATE
 # =============================================================================
+
 
 
