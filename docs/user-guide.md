@@ -632,7 +632,34 @@ iTOL v6
 MAFFT
 DADA2
 Cutadapt
-Qiime2 v.qiime2-2023.7
+Qiime2 v.qiime2-2023.7 and all plugins v.2023.7.0
 Atria v.4.0.2
 KMA v.1.6.8
 bedtools v.2.31.1
+R v4.5.1  
+vegan v2.6-6.1 (R package)
+biodiversityR v2.16-1 (R package)
+MASS v7.3-60.4, v7.3-65 (R package)
+glmmTMB v1.1.12 (R package)
+emmeans v1.10.2 (R package)
+randomForest v4.7-1.1 (R package)
+RcmdrMisc v2.9-1 (R package)
+dtw v1.23.1  (R package)
+pheatmap v1.0.13 (R package)
+dplyc v1.1.4 (R package)
+ggplot2 v2.0.0 (R package)
+cowplot v1.2.0 (R package)
+tidyverse v2.0.0 (R package)
+tidyr v.1.3.1 (R package)
+phyloseq v1.52.0 (R package)
+stringr v1.5.2 (R package)
+TSA v1.3.1 (R package)
+reshape2 v1.4.4 (R package)
+viridis v0.6.5 (R package)
+ggpubr v0.6.1 (R package)
+Hmisc v5.2-3 (R package)
+pdp v0.8.2 (R package)
+VennDiagram v1.7.3 (R package)
+ggvenn v0.1.10 (R package)
+
+ 
