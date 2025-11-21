@@ -105,8 +105,7 @@ keywords:
 # ---------------------------------------------------------------------------
 authors:
   Haley Sanderson 
-  - name: "Biological Informatics Center of Excellence"
-    affiliation: "Agriculture and Agri-Food Canada (AAFC)"
+   - affiliation: "Agriculture and Agri-Food Canada (AAFC)"
     ORCID: "https://orcid.org/0009-0006-4812-1647"
 
   Yichao Shi
@@ -139,6 +138,7 @@ authors:
 # =============================================================================
 # END OF TEMPLATE
 # =============================================================================
+
 
 
 
