@@ -24,7 +24,7 @@
 ## About
 
 
-These scripts provide the inforamtion to process and analysis 16S sequencing and metagenomic sequencing reads originating for watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data). 
+These scripts provide the information to process and analysis 16S sequencing and metagenomic sequencing reads originating from watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data). 
 
 ---
 
@@ -76,6 +76,7 @@ See the [LICENSE](LICENSE) file for details. Visit [LicenseHub](https://licenseh
 **Copyright ©** His Majesty the King in Right of Canada, as represented by the Minister of Agriculture and Agri-Food, 2025.
 
 ---
+
 
 
 
