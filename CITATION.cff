@@ -104,11 +104,13 @@ keywords:
 #   (2) name                        (for teams or organizations)
 # ---------------------------------------------------------------------------
 authors:
-  Haley Sanderson 
+ family-names: "Sanderson"
+  given-names: "Haley"  
    - affiliation: "Agriculture and Agri-Food Canada (AAFC)"
     ORCID: "https://orcid.org/0009-0006-4812-1647"
 
-  Yichao Shi
+family-names: "Shi"
+  given-names: "Yichao"
   - affiliation: "Agriculture and Agri-Food Canada"
     ORCID: "https://orcid.org/0009-0009-4531-4111"
 
@@ -138,6 +140,7 @@ authors:
 # =============================================================================
 # END OF TEMPLATE
 # =============================================================================
+
 
 
 
