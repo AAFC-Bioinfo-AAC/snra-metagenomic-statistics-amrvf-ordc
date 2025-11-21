@@ -71,8 +71,7 @@ repository-code: "https://github.com/AAFC-Bioinfo-AAC/snra-metagenomic-statistic
 # Use folded block scalars (">-") for readability.
 # Newlines are converted to spaces, forming a flowing paragraph.
 # ---------------------------------------------------------------------------
-abstract: >-
-This repository contains the scripts for the processing and analysis of 16S and metagenomic data from the water basin including taxonomic classification of the samples and detection of antimicrobial resistance and virulence genes.
+abstract: "This repository contains the scripts for the processing and analysis of 16S and metagenomic data from the water basin including taxonomic classification of the samples and detection of antimicrobial resistance and virulence genes."
 
 # ---------------------------------------------------------------------------
 # KEYWORDS (optional)
@@ -139,6 +138,7 @@ authors:
 # =============================================================================
 # END OF TEMPLATE
 # =============================================================================
+
 
 
 
