@@ -7,12 +7,20 @@
 
 These scripts provide the inforamtion to process and analysis 16S sequencing and metagenomic sequencing reads originating for watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data).
 
+o Step 1: Run quality control scripts.
+o Step 2: Run 16S pipeline (if applicable).
+o Step 3: Run MAG assembly / binning / QC.
+o Step 4: Run read-based AMR/VF detection.
+o Step 5: Run specific R scripts and/or notebooks to generate tables and figures.
+
+
+
 ## Workflow diagrams
 
 #### 16S Amplicon Sequence Processing
-![Work Flowchart of 16S Processing](Flowchart/GRDI_16S_pipeline.jpeg)
+![Work Diagram of 16S Processing](Flowchart/GRDI_16S_pipeline.jpeg)
 #### Metagenomic Sequence Processing
-![Work FlowChart of Metagenomic Data Processing](Flowchart/Wen_Project_1_FlowChart.drawio.png)
+![Work Diagram of Metagenomic Data Processing](Flowchart/Wen_Project_1_FlowChart.drawio.png)
 
 
 ---
