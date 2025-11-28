@@ -5,7 +5,7 @@
 
 ## Overview
 
-These scripts provide the inforamtion to process and analysis 16S sequencing and metagenomic sequencing reads originating for watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data).
+These scripts provide the information to process and analysis 16S sequencing and metagenomic sequencing reads originating for watershed data and analysed the ability to detect genera related to pathogenic bacteria, antimicrobial resistance genes and virulence genes using both sequencing methods. This data is also analyzed in relation to their accompanying metadata for the watershed samples (physicochemical properties of the water samples, weather, and land use data).
 
 - Step 1: Run quality control scripts.
 - Step 2: Run 16S pipeline (if applicable).
